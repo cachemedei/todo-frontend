@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import * as deleteApi from '../api/deleteTodo'; //import to spy on function
-import DeleteBtn from '../components/DeleteBtn';
+import * as deleteApi from '../../api/deleteTodo'; //import to spy on function
+import DeleteBtn from '../../components/DeleteBtn';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 describe('Delete button test suite', () => {
     it('Calls deleteTodo with correct id number', () => {
@@ -10,7 +11,11 @@ describe('Delete button test suite', () => {
             .mockImplementation(() => Promise.resolve());
         const testId = 5;
 
-        render(<DeleteBtn id={5} />);
+        render(
+            <MemoryRouter initialEntries={['/']}>
+                <DeleteBtn id={5} />
+            </MemoryRouter>
+        );
 
         //act
         const button = screen.getByRole('button', { name: /delete/i });
@@ -29,7 +34,11 @@ describe('Delete button test suite', () => {
             .spyOn(deleteApi, 'deleteTodo')
             .mockImplementation(() => Promise.resolve());
 
-        render(<DeleteBtn id={undefined} />);
+        render(
+            <MemoryRouter initialEntries={['/']}>
+                <DeleteBtn id={undefined} />
+            </MemoryRouter>
+        );
 
         //act
         const button = screen.getByRole('button', { name: /delete/i });
@@ -42,3 +51,5 @@ describe('Delete button test suite', () => {
         mockDeleteTodo.mockRestore();
     });
 });
+
+//memory router is something that comes from react-router-dom

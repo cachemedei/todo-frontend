@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import * as todoListHook from '../hooks/useTodoList';
-import TodoList from '../pages/TodoList';
-import { Todo } from '../types/Todo';
+import * as todoListHook from '../../hooks/useTodoList';
+import TodoList from '../../pages/TodoList';
+import { Todo } from '../../types/Todo';
+import { MemoryRouter } from 'react-router-dom';
 
 //mock hook
 jest.mock('../hooks/useTodoList');
@@ -27,7 +28,11 @@ describe('TodoList test suite', () => {
             todoList: mockTodos,
         });
 
-        render(<TodoList />);
+        render(
+            <MemoryRouter>
+                <TodoList />
+            </MemoryRouter>
+        );
         expect(screen.getByText(/test1/i)).toBeInTheDocument();
         expect(screen.getByText(/test2/i)).toBeInTheDocument();
     });

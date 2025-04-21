@@ -1,4 +1,4 @@
-import { postTodo } from '../api/postTodo';
+import { postTodo } from '../../api/postTodo';
 
 //mock global fetch api
 global.fetch = jest.fn();

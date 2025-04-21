@@ -1,4 +1,5 @@
 export async function postTodo(title: string, description: string) {
+    const token = window.localStorage.getItem('token');
     const url = 'http://localhost:6213/api/todo';
     const response = await fetch(url, {
         method: 'POST',
@@ -9,6 +10,7 @@ export async function postTodo(title: string, description: string) {
             title: title,
             description: description,
             isCompleted: false,
+            accountId: 3,
         }),
     });
     if (!response.ok) {

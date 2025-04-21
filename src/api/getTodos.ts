@@ -1,5 +1,5 @@
-export async function getTodos() {
-    const url = 'http://localhost:6213/api/todo';
+export async function getTodos(id: number) {
+    const url = `http://localhost:6213/api/todo/${id}`;
     const response = await fetch(url, { method: 'GET' });
 
     if (!response.ok) {

@@ -1,11 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { Todo } from '../types/Todo';
-import TodoItem from '../components/TodoItem';
+import { Todo } from '../../types/Todo';
+import TodoItem from '../../components/TodoItem';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('Todo item test suite', () => {
     let mockTodo: Todo;
-    
+
     it('renders todo item', () => {
         mockTodo = {
             title: 'test',
@@ -13,7 +14,11 @@ describe('Todo item test suite', () => {
             isCompleted: false,
         };
 
-        render(<TodoItem todo={mockTodo} />);
+        render(
+            <MemoryRouter>
+                <TodoItem todo={mockTodo} />
+            </MemoryRouter>
+        );
 
         const checkbox = screen.getByRole('checkbox');
 
@@ -30,7 +35,11 @@ describe('Todo item test suite', () => {
             isCompleted: true,
         };
 
-        render(<TodoItem todo={mockTodo} />);
+        render(
+            <MemoryRouter>
+                <TodoItem todo={mockTodo} />
+            </MemoryRouter>
+        );
 
         const checkbox = screen.getByRole('checkbox');
 

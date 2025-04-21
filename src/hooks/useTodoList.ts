@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { Todo } from '../types/Todo';
 import { getTodos } from '../api/getTodos';
 
-export default function useTodos() {
+export default function useTodos(id: number) {
     const [todoList, setTodoList] = useState<Todo[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
 
     useEffect(() => {
-        getTodos()
+        getTodos(id)
             .then((todos) => {
                 setTodoList(todos);
                 setIsLoading(false);

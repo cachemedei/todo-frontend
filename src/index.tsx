@@ -6,6 +6,8 @@ import TodoList from './pages/TodoList';
 import Nav from './components/Nav';
 import AddNewTodo from './pages/AddNewTodo';
 import EditTodo from './pages/EditTodo';
+import Login from './pages/Login';
+import { AuthContext, AuthProvider } from './context/AuthProvider';
 
 const router = createBrowserRouter([
     {
@@ -15,6 +17,7 @@ const router = createBrowserRouter([
             { path: '/', element: <TodoList /> },
             { path: '/add', element: <AddNewTodo /> },
             { path: '/edit/:id', element: <EditTodo /> },
+            { path: '/login', element: <Login /> },
         ],
     },
 ]);
@@ -24,6 +27,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <AuthProvider>
+            <RouterProvider router={router} />
+        </AuthProvider>
     </React.StrictMode>
 );
